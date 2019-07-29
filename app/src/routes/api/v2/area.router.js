@@ -36,6 +36,7 @@ class AreaRouterV2 {
             { $set: update_params }
          );
         logger.info('Updated! ', area);
+        ctx.body = geostores
     }
 
     static async get(ctx) {

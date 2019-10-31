@@ -3,6 +3,7 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const config = require('config');
 const uuidV4 = require('uuid/v4');
+const moment = require('moment')
 
 AWS.config.update({
     accessKeyId: config.get('s3.accessKeyId'),
@@ -44,6 +45,29 @@ class S3Service {
                     logger.debug('File uploaded successfully', resp);
                     resolve(`https://s3.amazonaws.com/${config.get('s3.bucket')}/${config.get('s3.folder')}/${uuid}.${ext}`);
                 });
+            });
+        });
+    }
+
+    async uploadJson(data) {
+        logger.info(`Uploading file json`);
+        return new Promise((resolve, reject) => {
+            //bucket = gfw-pipelines/
+            //key = tiggers/emr/aoi/<yyyymmdd>
+            const date = moment().format("YYYYMMDD");
+            this.s3.upload({
+                Bucket: config.get('s3.bucket'),
+                Key: `${config.get('s3.folder')}/${date}.json`,
+                Body: data,
+                ACL: 'public-read'
+            }, (resp) => {
+                if (resp && resp.statusCode >= 300) {
+                    logger.error(resp);
+                    reject(resp);
+                    return;
+                }
+                logger.debug('File uploaded successfully', resp);
+                resolve(`https://s3.amazonaws.com/${config.get('s3.bucket')}/${config.get('s3.folder')}/${date}.json`);
             });
         });
     }

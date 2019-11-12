@@ -89,7 +89,7 @@
 			"path": "/api/v2/download-tiles/:geostoreId/:minZoom/:maxZoom"
 		}
 	},{
-		"path": "/v1/area",
+		"path": "/area",
 		"method": "GET",
 		"authenticated": true,
 		"redirect": {
@@ -97,7 +97,7 @@
 			"path": "/api/v1/area"
 		}
 	},{
-        "path": "/v1/area/fw",
+        "path": "/area/fw",
         "method": "GET",
         "authenticated": true,
         "redirect": {
@@ -105,7 +105,7 @@
           "path": "/api/v1/area/fw"
         }
       },{
-        "path": "/v1/area/fw/:userId",
+        "path": "/area/fw/:userId",
         "method": "GET",
         "authenticated": true,
         "redirect": {
@@ -113,7 +113,7 @@
           "path": "/api/v1/area/fw/:userId"
         }
       },{
-          "path": "/v1/area/:id",
+          "path": "/area/:id",
           "method": "GET",
           "authenticated": true,
           "redirect": {
@@ -121,7 +121,7 @@
               "path": "/api/v1/area/:id"
 		}
 	},{
-		"path": "/v1/area",
+		"path": "/area",
 		"method": "POST",
 		"authenticated": true,
 		"redirect": {
@@ -129,7 +129,7 @@
 			"path": "/api/v1/area"
 		}
 	},{
-		"path": "/v1/area/fw/:userId",
+		"path": "/area/fw/:userId",
 		"method": "POST",
 		"authenticated": true,
 		"redirect": {
@@ -137,7 +137,7 @@
 			"path": "/api/v1/area/fw/:userId"
 		}
 	},{
-		"path": "/v1/area/:id",
+		"path": "/area/:id",
 		"method": "PATCH",
 		"authenticated": true,
 		"redirect": {
@@ -145,7 +145,7 @@
 			"path": "/api/v1/area/:id"
 		}
 	},{
-		"path": "/v1/area/:id",
+		"path": "/area/:id",
 		"method": "DELETE",
 		"authenticated": true,
 		"redirect": {
@@ -153,7 +153,7 @@
 			"path": "/api/v1/area/:id"
 		}
 	}, {
-		"path": "/v1/area/:id/alerts",
+		"path": "/area/:id/alerts",
 		"method": "GET",
 		"authenticated": true,
 		"redirect": {
@@ -161,7 +161,7 @@
 			"path": "/api/v1/area/:id/alerts"
 		}
 	},{
-		"path": "/v1/download-tiles/:geostoreId/:minZoom/:maxZoom",
+		"path": "/download-tiles/:geostoreId/:minZoom/:maxZoom",
 		"method": "GET",
 		"redirect": {
 			"method": "GET",

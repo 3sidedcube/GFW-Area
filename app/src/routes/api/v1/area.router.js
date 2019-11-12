@@ -43,7 +43,8 @@ class AreaRouter {
         try {
             team = await TeamService.getTeamByUserId(userId);
         } catch (e) {
-            logger.error(e);
+            logger.error('team error');
+            logger.error(JSON.stringify(team, null, 2));
         }
         const teamAreas = team && Array.isArray(team.areas) ? team.areas : [];
         const query = {
@@ -81,12 +82,14 @@ class AreaRouter {
     static async saveByUserId(ctx) {
         await AreaRouter.saveArea(ctx, ctx.params.userId);
     }
-
+    // @todo else if can upload a standard image - first I need a standard path for a default
     static async saveArea(ctx, userId) {
         logger.info('Saving area');
         let image = '';
         if (ctx.request.body.files && ctx.request.body.files.image) {
             image = await s3Service.uploadFile(ctx.request.body.files.image.path, ctx.request.body.files.image.name);
+        }else if (ctx.request.body.files){
+            image = 'https://via.placeholder.com/150x150.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide%20C/O%20https://placeholder.com/';
         }
         let datasets = [];
         if (ctx.request.body.fields) {
@@ -157,11 +160,14 @@ class AreaRouter {
         if (ctx.request.body.datasets) {
             area.datasets = JSON.parse(ctx.request.body.datasets);
         }
+        //@todo could be image part here also
         if (files && files.image) {
             area.image = await s3Service.uploadFile(files.image.path, files.image.name);
+        }else if (files){
+            area.image = 'https://via.placeholder.com/150x150.png?text=Visit+WhoIsHostingThis.com+Buyers+Guide%20C/O%20https://placeholder.com/';
         }
         if (typeof ctx.request.body.templateId !== 'undefined') {
-            area.templateId = ctx.request.body.templateId;
+            area.templateId.addToSet(ctx.request.body.templateId[0]);
         }
         area.updatedDate = Date.now;
 

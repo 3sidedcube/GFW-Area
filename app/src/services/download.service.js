@@ -129,6 +129,8 @@ class DownloadService {
                 promises = null;
             }
         } catch(err){
+            logger.error(err);
+            logger.error('problem donwloading');
 
         }
         await DownloadService.zipFolder(tmpobj.name, `${tmpDownload.name}/download.zip`);

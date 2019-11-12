@@ -7,5 +7,5 @@ test:
   container_name: gfw-area-test
   environment:
     NODE_ENV: test
-    CT_URL: http://mymachine:9000
+    CT_URL: http://mymachine.test:9000
   command: test

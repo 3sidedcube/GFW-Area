@@ -10,6 +10,7 @@ class TeamService {
             method: 'GET',
             json: true
         });
+
         if (!team || !team.data) return null;
         return Object.assign({}, team.data.attributes, { id: team.data.id });
     }
